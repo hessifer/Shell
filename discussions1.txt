@@ -1,0 +1,116 @@
+Agenda:
+    Working Text:
+        -less
+        -cat
+        -tail
+        -head
+        -cut
+        -sort
+        -wc
+        -grep *here*
+        -awk
+        -sed
+        
+    Filesystem Commands:
+        -find
+        -lsof
+        -locate
+        -updatedb
+    
+    Process Management:
+        -ps
+        -top
+        -htop
+        -jobs
+        -kill
+    
+    *******************
+    command: less - view a files content in a searchable and paginated way
+    example: less /etc/passwd - paginate the file /etc/passwd
+
+    q - quit
+    G - go to bottom of page
+    g - go to top of page
+    /text - search for specific text
+    n - repeat the last search
+    ?text - perform backwards search for specific text
+    
+     *******************
+     command: cat - view a files contents
+     example: cat /etc/passwd - displays the contents of /etc/passwd to STDOUT
+     
+     File Descriptors: https://www.bottomupcs.com/file_descriptors.xhtml
+     STDIN =  0
+     STDOUT = 1
+     STDERR = 2
+
+    better used for short files as it ends on the last line of output, 
+    if you want to display the first line of output in a long file try 
+    using 'tac' the inverse of cat
+    
+    example: tac /etc/passwd
+    
+    *******************
+    command: tail - displays the last x number of lines of a file
+    example: tail /etc/passwd - displays the last 10 lines of /etc/passwd
+
+    -n 5 or 5 - will display the last 5 lines
+    -f will display last 10 lines and continue to refresh output (great for watching log files)
+    
+    *******************
+    command: head - displays the first x number of lines of a file
+    example: head /etc/passwd - displays the first 10 lines of /etc/passwd
+
+    -n 5 or 5 - will display the first 5 lines
+
+    example: head -n 11 /etc/passwd | tail -n 1 - displays line number 11 in /etc/passwd
+    
+    *******************
+    command: cut - retrieve specific information from a file based off of a delimeter
+    example: cut -d ':' -f 1 /etc/passwd - will display the text in the first column of 
+             /etc/passwd using the ':' as the marker for the next column or delimiter
+
+    
+    *******************
+    command: sort - sorts the data sent to STDOUT
+    example: sort /etc/passwd - sorts the content of /etc/passwd in alphabetic order
+
+    -n - sort in numeric order
+    -r - sort in reverse order (-rn)
+    -k - sort by column number (-k3)
+    -t - use a delimiter (-t ':')
+
+    example: sort -n -k3 -t ':' /etc/passwd - sort on column 3 of /etc/passwd using ':' as the delimiter
+    
+    *******************
+    command: wc - displays the number of lines, words, and chars in a file
+    example: wc /etc/passwd - displays the number of lines, words, and characters in /etc/passwd
+
+    -l - number of lines
+    -w - number of words
+    -c - number of characters
+    -L - length of longest line
+    
+    *******************
+    command: grep - search for a particular pattern within a file
+    example: grep ^jeep /Documents/vehicles.txt - uses a regular expression to search for all lines that start with the string jeep in the file /Documents/vehicles.txt
+
+    ^text - line starts with text
+    text$ - line ends with text
+    . - wildcard that matches any single character
+    [abc] - matches a, b, or c
+    * - match 0 to infinite number of the previous character
+    {2} - match exactly two of the previous character
+    {1,3} - match a minimum of 1 and a maximum of 3 of the previous character
+    colou?r - match 0 or 1 of the previous character, makes the previous character optional
+    -i - not case sensitive
+    -v - show lines that do not contain the expression
+    -r - search files in the current director and all subdirectories
+    -e - used for matching more than one expression on a line
+    -A <number> - display <number> of lines after the matching regular expression
+    -B <number> - display <number> of lines before the matching regular expression
+
+    example: grep '^#' /file - will display all the lines starting with a # (i.e. comments)
+    example: grep -v '^#' /file - display all lines that do not start with a #
+    example: grep -v '^#' /file -B 5 - show lines that do not start with a # and the five lines before it
+    example: grep -v -e '^#' -e '^$' /file - exclude all lines that are blank or start with a #

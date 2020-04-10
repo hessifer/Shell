@@ -1,0 +1,8 @@
+Examples of awk
+
+awk -F ':' '{print $1}' /etc/passwd - display the first column in /etc/passwd using ':' as the delimiter
+when in doubt use awk :`)
+
+awk -F ':' '/penguin/ {print "Penguin UID: ",$3}' /etc/passwd - searches for the expression 'penguin' and displays "Penguin UID: " with whatever the value is in column 3
+
+ps auxw |awk '/\/usr\/sbin\/sshd/ {print "SSHD PID: ",$2}' - searches for the expression '/usr/sbin/sshd' in the STDOUT of the ps command and then prints "SSHD PID: " in addition to the value found in column 2 for every matching line, which in this case is the PID

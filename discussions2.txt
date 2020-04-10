@@ -1,0 +1,127 @@
+Agenda:
+    Working Text:
+        -awk
+        -sed
+        
+    Filesystem Commands:
+        -find
+        -lsof
+        -locate
+        -updatedb
+    
+    Process Management:
+        -ps
+        -top
+        -htop
+        -jobs
+        -kill
+        
+    Man Pages:
+        -how to find the format information for a file
+            - man 5 passwd
+        -how to find information on man
+            - man man
+        
+
+1. Project: Using the various commands learned in discussion 1 and discussion 2 with respect to
+   managing text walk through various scenarios of parsing information from the provided logfile.
+
+
+    
+*********awk************
+
+Command used to view 6th column in /etc/passwd
+
+Miles:
+    awk -F ':' '{print $6}' /etc/passwd
+    
+Camilo:
+    awk -F ':' '{print $6,$7}' /etc/passwd
+    
+Command used to view 6th column in /etc/passwd, but add useful information.
+Home Directory: 
+    
+Camilo:
+    awk -F ':' '{print {Home Directory:} $6}' /etc/passwd
+    
+Charles:
+    awk -F ':' '{print "Home Directory: ", $6}' /etc/passwd
+
+**************************
+Create a file that includes your process table information and store it in /tmp/ps.txt
+
+Using that file display user, pid, and command-line syntax used
+
+Barney - awk -F ' ' '{print $1,$2,$11}' /tmp/ps.txt
+
+
+ps aux | awk '{print "USER: " $1, "PID: " $2, "COMMAND: " $NF}'
+
+ps -eo user,pid,cmd  > /tmp/ps.txt
+
+*************************
+1. create a user called penguin
+    sudo useradd -G wheel -c "Test for Linux" -m penguin
+2. print the User ID for penguin prefixed with Penguin UID: 
+    awk -F ':' '/penguin/ {print "Penguin UID: ",$3}' /etc/passwd
+
+*********sed************
+sed -n 5p /etc/passwd
+
+sed '/^$/d' blah.txt
+
+
+********* Practice ********
+Please solve the questions using this log file: http://www.almhuette-raith.at/apache-log/access.log
+Remember to build your commands with sample output
+
+1) A list with each status code and the number of times it appears 
+     157 401
+   2881 403
+ 630375 404
+    154 405
+     54 406
+     ...
+ 
+2) A sorted list of the top 10 most frequent client ips and their counts
+ 623829 13.84.43.203
+ 464219 193.106.31.130
+ 360050 100.1.14.108
+ ...
+ 
+3) A sorted list of the top 10 POST and their counts
+1185828 /administrator/index.php
+ 301105 //administrator/index.php
+  54898 /index.php?option=com_contact&view=contact&id=1
+  ...
+  
+4) The top 12 GET and their counts
+ 301165 //administrator/index.php
+ 294917 //administrator/index.php?option=com_plugins
+ ...
+ 
+5) The number of non 200 status codes broken down per hour and their counts
+6) A list of all the different web browsers and the count of each one
+7) A sum of the total bytes per hour
+8) A avg of the bytes per hour
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

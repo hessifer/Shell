@@ -1,0 +1,24 @@
+Examples of sed
+sed -n 5p /etc/passwd - displays the fifth line of the file /etc/passwd
+
+sed -i 's/blah/blahblahblahblah/g' movie.script - will do a global replace directly to the file and not STDOUT of the word blah with the word blahblahblahblah {Hotel Translyvania FTW}
+
+sed -i -e '2d' somefile.txt - deletes line number two from the file somefile.txt
+
+sed -i -e '2d;20,25d' somefile.txt - deletes line number two and line numbers twenty through twenty-five from the file somefile.txt
+
+sed -n '3~2'p somefile.txt - prints every 2nd line starting from line 3
+
+sed 2q somefile.txt - display the first two lines
+
+sed -n /^root/p somefile.txt - print all lines in somefile.txt that start with the word root
+
+sudo virsh list | sed 1,2d | sed /^$/d - 
+
+cat /etc/services |awk '{printf "%16s %15s\n", $1, $2}' |sed 's/\//:/g' | sed '1,9d' |less
+
+# Delete first and last char in string
+sed 's/^.\(.*\).$/\1/‘
+
+# Delete blank lines of a file
+sed '/^$/d' blah.txt
